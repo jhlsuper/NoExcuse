@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "136799221418",
+    "project_id": "noexcuse-6a621",
+    "storage_bucket": "noexcuse-6a621.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136799221418:android:e034c55acbdfe01c1ac2d3",
+        "android_client_info": {
+          "package_name": "com.noexcuse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfM1D11Rwmcd6S0hQ44vnXLYlP4L4JRDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
