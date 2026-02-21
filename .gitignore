@@ -89,3 +89,5 @@ Thumbs.db
 
 # Metro
 .metro-health-check*
+android/app/google-services.json
+ios/GoogleService-Info.plist
