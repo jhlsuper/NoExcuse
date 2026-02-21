@@ -14,6 +14,22 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+$RNFirebaseAsStaticFramework = true
+
+pod 'FirebaseCore', :modular_headers => true
+pod 'FirebaseCoreInternal', :modular_headers => true
+pod 'FirebaseAuth', :modular_headers => true
+pod 'FirebaseAuthInterop', :modular_headers => true
+pod 'FirebaseAppCheckInterop', :modular_headers => true
+pod 'FirebaseCoreExtension', :modular_headers => true
+pod 'FirebaseFirestore', :modular_headers => true
+pod 'FirebaseFirestoreInternal', :modular_headers => true
+pod 'FirebaseStorage', :modular_headers => true
+pod 'FirebaseSharedSwift', :modular_headers => true
+pod 'GoogleUtilities', :modular_headers => true
+pod 'RecaptchaInterop', :modular_headers => true
+pod 'GTMSessionFetcher', :modular_headers => true
+
 target 'NoExcuse' do
   config = use_native_modules!
 
