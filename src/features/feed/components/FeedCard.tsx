@@ -1,38 +1,20 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import {colors} from '@theme/colors';
 import {typography} from '@theme/typography';
 import {spacing} from '@theme/spacing';
+import {sizes} from '@theme/sizes';
 import {FeedItem} from '@types/global.types';
+import {getCategoryColors} from '@shared/utils';
+import {formatTimeAgo} from '@shared/utils';
+import {Avatar, Badge, CategoryCard, LikeButton} from '@shared/components';
 
 interface FeedCardProps {
   item: FeedItem;
 }
 
-const getCategoryColors = (colorKey: string) => {
-  const key = colorKey as keyof typeof colors.category;
-  return colors.category[key] ?? colors.category.default;
-};
-
-const formatTimeAgo = (timestamp: number): string => {
-  const diff = Date.now() - timestamp;
-  const minutes = Math.floor(diff / 60000);
-  if (minutes < 60) return `${minutes}분 전`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}시간 전`;
-  const days = Math.floor(hours / 24);
-  return `${days}일 전`;
-};
-
 export const FeedCard = ({item}: FeedCardProps) => {
-  const [liked, setLiked] = useState(item.isLiked);
-  const [likeCount, setLikeCount] = useState(item.likeCount);
   const catColors = getCategoryColors(item.topic.color);
-
-  const handleLike = () => {
-    setLiked(prev => !prev);
-    setLikeCount(prev => (liked ? prev - 1 : prev + 1));
-  };
 
   const renderCardContent = () => {
     const {record, topic} = item;
@@ -75,38 +57,31 @@ export const FeedCard = ({item}: FeedCardProps) => {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.userInfo}>
-          <View style={[styles.avatar, {backgroundColor: catColors.accent}]}>
-            <Text style={styles.avatarText}>
-              {item.userDisplayName.charAt(0)}
-            </Text>
-          </View>
+          <Avatar
+            initial={item.userDisplayName.charAt(0)}
+            color={catColors.accent}
+          />
           <Text style={styles.userName}>{item.userDisplayName}</Text>
         </View>
-        <View style={[styles.badge, {backgroundColor: catColors.accent + '33'}]}>
-          <Text style={[styles.badgeText, {color: catColors.accent}]}>
-            {item.topic.icon} {item.topic.title}
-          </Text>
-        </View>
+        <Badge
+          icon={item.topic.icon}
+          label={item.topic.title}
+          colorScheme={catColors.accent}
+        />
       </View>
 
       {/* Image-like card area */}
-      <View style={[styles.imageCard, {backgroundColor: catColors.bg}]}>
-        <View
-          style={[
-            styles.accentBar,
-            {backgroundColor: catColors.accent},
-          ]}
-        />
+      <CategoryCard bgColor={catColors.bg} accentColor={catColors.accent}>
         {renderCardContent()}
-      </View>
+      </CategoryCard>
 
       {/* Footer */}
       <View style={styles.footer}>
         <View style={styles.footerLeft}>
-          <Pressable onPress={handleLike} style={styles.likeButton}>
-            <Text style={styles.likeIcon}>{liked ? '❤️' : '🤍'}</Text>
-            <Text style={styles.likeCount}>{likeCount}</Text>
-          </Pressable>
+          <LikeButton
+            initialLiked={item.isLiked}
+            initialCount={item.likeCount}
+          />
           <Text style={styles.pomodoroText}>
             🍅 {item.record.pomodoroCount}
           </Text>
@@ -122,7 +97,7 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.md,
     marginBottom: spacing.md,
     backgroundColor: colors.surface,
-    borderRadius: 16,
+    borderRadius: sizes.radii.lg,
     overflow: 'hidden',
   },
   header: {
@@ -130,49 +105,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm + 2,
+    paddingVertical: sizes.rowPaddingV,
   },
   userInfo: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
   },
-  avatar: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  avatarText: {
-    ...typography.bodySmall,
-    color: colors.text,
-    fontWeight: '700',
-  },
   userName: {
     ...typography.body,
     color: colors.text,
     fontWeight: '600',
-  },
-  badge: {
-    paddingHorizontal: spacing.sm + 2,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
-  },
-  badgeText: {
-    ...typography.caption,
-    fontWeight: '600',
-  },
-  imageCard: {
-    aspectRatio: 1,
-    marginHorizontal: spacing.sm,
-    borderRadius: 12,
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  accentBar: {
-    height: 3,
-    width: '100%',
   },
   contentArea: {
     flex: 1,
@@ -182,11 +125,11 @@ const styles = StyleSheet.create({
   listItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: spacing.sm + 2,
+    marginBottom: sizes.rowPaddingV,
     gap: spacing.sm,
   },
   checkIcon: {
-    fontSize: 16,
+    fontSize: sizes.icon.sm,
   },
   listText: {
     ...typography.body,
@@ -206,7 +149,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: spacing.md,
     right: spacing.md,
-    fontSize: 48,
+    fontSize: sizes.icon.xl,
     opacity: 0.15,
   },
   footer: {
@@ -214,24 +157,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm + 2,
+    paddingVertical: sizes.rowPaddingV,
   },
   footerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.md,
-  },
-  likeButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-  },
-  likeIcon: {
-    fontSize: 18,
-  },
-  likeCount: {
-    ...typography.bodySmall,
-    color: colors.text,
   },
   pomodoroText: {
     ...typography.bodySmall,
