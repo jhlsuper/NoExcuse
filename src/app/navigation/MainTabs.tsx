@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@theme/colors';
+import { FeedScreen } from '@features/feed/screens/FeedScreen';
 
 // 임시 placeholder 화면들
 const PlaceholderScreen = ({ name }: { name: string }) => (
@@ -9,8 +10,6 @@ const PlaceholderScreen = ({ name }: { name: string }) => (
     <Text style={styles.text}>{name}</Text>
   </View>
 );
-
-const HomeScreen = () => <PlaceholderScreen name="Home" />;
 const TimerScreen = () => <PlaceholderScreen name="Timer" />;
 const DiaryScreen = () => <PlaceholderScreen name="Diary" />;
 const ProgressScreen = () => <PlaceholderScreen name="Progress" />;
@@ -31,7 +30,7 @@ export const MainTabs = () => {
         tabBarInactiveTintColor: colors.textSecondary,
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={FeedScreen} />
       <Tab.Screen name="Timer" component={TimerScreen} />
       <Tab.Screen name="Diary" component={DiaryScreen} />
       <Tab.Screen name="Progress" component={ProgressScreen} />

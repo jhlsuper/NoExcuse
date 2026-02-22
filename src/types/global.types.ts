@@ -38,6 +38,17 @@ export interface Diary {
   createdAt: number;
 }
 
+export interface FeedItem {
+  id: string;
+  userId: string;
+  userDisplayName: string;
+  record: Record;
+  topic: Topic;
+  likeCount: number;
+  isLiked: boolean;
+  createdAt: number;
+}
+
 export interface DailySummary {
   date: string;
   totalMinutes: number;
