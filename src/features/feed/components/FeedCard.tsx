@@ -4,7 +4,7 @@ import {colors} from '@theme/colors';
 import {typography} from '@theme/typography';
 import {spacing} from '@theme/spacing';
 import {sizes} from '@theme/sizes';
-import {FeedItem} from '@types/global.types';
+import {FeedItem} from '@typeDefs/global.types';
 import {getCategoryColors} from '@shared/utils';
 import {formatTimeAgo} from '@shared/utils';
 import {Avatar, Badge, CategoryCard, LikeButton} from '@shared/components';

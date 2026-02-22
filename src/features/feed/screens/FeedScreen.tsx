@@ -6,7 +6,7 @@ import {typography} from '@theme/typography';
 import {spacing} from '@theme/spacing';
 import {FeedCard} from '@features/feed/components/FeedCard';
 import {mockFeedItems} from '@features/feed/data/mockFeed';
-import {FeedItem} from '@types/global.types';
+import {FeedItem} from '@typeDefs/global.types';
 
 export const FeedScreen = () => {
   const insets = useSafeAreaInsets();

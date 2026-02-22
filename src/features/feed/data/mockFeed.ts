@@ -1,4 +1,4 @@
-import {FeedItem} from '@types/global.types';
+import {FeedItem} from '@typeDefs/global.types';
 
 const now = Date.now();
 const day = 24 * 60 * 60 * 1000;

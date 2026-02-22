@@ -11,7 +11,7 @@ module.exports = {
           '@shared': './src/shared',
           '@services': './src/services',
           '@theme': './src/theme',
-          '@types': './src/types',
+          '@typeDefs': './src/types',
         },
       },
     ],

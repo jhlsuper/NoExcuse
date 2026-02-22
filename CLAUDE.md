@@ -34,7 +34,7 @@ Configured in both `tsconfig.json` and `babel.config.js` (via `babel-plugin-modu
 - `@shared/*` → `src/shared/*`
 - `@services/*` → `src/services/*`
 - `@theme/*` → `src/theme/*`
-- `@types/*` → `src/types/*`
+- `@typeDefs/*` → `src/types/*`
 
 ### State Management
 
